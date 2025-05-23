@@ -6,7 +6,7 @@
 /*   By: ebonutto <ebonutto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:07:51 by ebonutto          #+#    #+#             */
-/*   Updated: 2025/05/19 20:05:22 by ebonutto         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:10:58 by ebonutto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ public:
 	unsigned int	shortestSpan( void );
 	unsigned int	longestSpan( void );
 
-	template <typename T>
-	void	addNumbers(typename T::iterator &begin, typename T::iterator &end) {
-		if (_maxSize <= _numbers.size())
+	template <typename Iterator>
+	void	addNumbers( Iterator begin, Iterator end ) {
+		if (std::distance(begin, end) + _numbers.size() > _maxSize)
 			throw std::runtime_error("Too many numbers!");
-		for (typename T::iterator it = begin; it != end; ++it)
-			_numbers.push_back(42);
+		_numbers.insert(_numbers.end(), begin, end);
 	}
 };
